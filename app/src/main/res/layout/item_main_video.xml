@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="300dp">
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/image_main_video"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/video_head"
+            android:layout_margin="5dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="300dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginRight="3dp"
+                android:maxEms="10"
+                android:maxLines="1"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:id="@+id/video_name"
+                android:layout_width="260dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:ellipsize="none"
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:maxEms="14"
+                android:maxLines="3"
+                android:id="@+id/video_description"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@null"
+            android:id="@+id/menu_one"
+            android:title="one"
+            android:checked="false"/>
+        <item
+            android:icon="@null"
+            android:id="@+id/menu_two"
+            android:title="two"
+            android:checked="false"/>
+        <item
+            android:icon="@null"
+            android:id="@+id/menu_three"
+            android:title="three"
+            android:checked="false"/>
+        <item
+            android:icon="@null"
+            android:id="@+id/menu_four"
+            android:title="four"
+            android:checked="false"/>
+        <item
+            android:icon="@null"
+            android:id="@+id/menu_five"
+            android:title="five"
+            android:checked="false"/>
+    </group>
+</menu>

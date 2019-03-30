@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">VideoDemo</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+
+    <string name="avatar_behavior" translatable="false">
+        com.example.think.videodemo.ui.customerbehavior.AvatarBehavior</string>
+    <string name="toolbar_scroll_behavior" translatable="false">
+         com.example.think.videodemo.ui.customerbehavior.ToolBarScrollBehavior</string>
+</resources>
