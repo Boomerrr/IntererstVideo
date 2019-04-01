@@ -25,19 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.activity.DetailVideoActivity" />
         <activity android:name=".ui.activity.MoreActivity" />
         <activity android:name=".ui.activity.HistoryActivity" />
         <activity
-            android:name=".ui.activity.TestActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:name=".ui.activity.TestActivity">
 
-        <activity android:name=".ui.activity.VideoInfoActivity"/>
+        </activity>
+        <activity android:name=".ui.activity.VideoInfoActivity" />
         <activity android:name=".ui.activity.CategoryActivity" />
-        <activity android:name=".ui.activity.SplashActivity"/>
+        <activity android:name=".ui.activity.SplashActivity" />
+        <activity android:name=".ui.activity.LogInActivity" />
+        <activity android:name=".ui.activity.SignInActivity"/>
     </application>
 
 </manifest>

@@ -7,6 +7,8 @@ import com.example.think.videodemo.base.BasePresenter;
 import com.example.think.videodemo.mvp.Contract.FunnyImageContract;
 import com.example.think.videodemo.mvp.Model.FunnyImageModel;
 
+import org.reactivestreams.Subscriber;
+
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -19,13 +21,15 @@ public class FunnyImagePresenter extends BasePresenter<FunnyImageContract.IView>
 
     private FunnyImageContract.IView iView;
 
+    private Disposable disposable;
+
     public FunnyImagePresenter(FunnyImageContract.IView iView){
         this.iView = iView;
     }
 
     public void getData() {
 
-        FunnyImageModel.getInstance().interest_image_response()
+        disposable = FunnyImageModel.getInstance().interest_image_response()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -57,6 +61,10 @@ public class FunnyImagePresenter extends BasePresenter<FunnyImageContract.IView>
                         iView.dismissLoad();
                     }
                 });
+    }
+
+    public void disposeThis(){
+        disposable.dispose();
     }
 
 }

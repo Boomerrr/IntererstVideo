@@ -1,5 +1,7 @@
 package com.example.think.videodemo.mvp.Model;
 
+import android.support.annotation.MainThread;
+
 import com.example.think.videodemo.Api.ApiService;
 import com.example.think.videodemo.Api.BaseApiImpl;
 

@@ -9,6 +9,7 @@ import com.example.think.videodemo.mvp.Model.HistorcialRankVideoModel;
 import com.example.think.videodemo.mvp.Model.WeekRankModel;
 
 import java.util.List;
+import java.util.Observable;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -20,13 +21,15 @@ public class WeekRankPresenter extends BasePresenter<RankContract.WeekIView> {
 
     private RankContract.WeekIView iView;
 
+    private Disposable disposable;
+
     public WeekRankPresenter(RankContract.WeekIView iView){
         this.iView = iView;
     }
 
     public void getData(){
 
-        WeekRankModel.getInstance().rank_weekly_response()
+        disposable = WeekRankModel.getInstance().rank_weekly_response()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -58,6 +61,10 @@ public class WeekRankPresenter extends BasePresenter<RankContract.WeekIView> {
                     }
                 });
 
+    }
+
+    public void disposeThis(){
+        disposable.dispose();
     }
 
 }

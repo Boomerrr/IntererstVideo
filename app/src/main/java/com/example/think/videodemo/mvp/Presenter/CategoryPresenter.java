@@ -24,13 +24,15 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.IView> {
 
     private CategoryContract.IView iView;
 
+    private Disposable disposable;
+
     public CategoryPresenter( CategoryContract.IView iView){
         this.iView = iView;
     }
 
     public void getData(){
 
-        CategoryModel.getInstance().category_response()
+        disposable = CategoryModel.getInstance().category_response()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -61,6 +63,10 @@ public class CategoryPresenter extends BasePresenter<CategoryContract.IView> {
                         iView.dismissLoad();
                     }
                 });
+    }
+
+    public void disposeThis(){
+        disposable.dispose();
     }
 
 }

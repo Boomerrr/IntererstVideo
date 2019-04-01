@@ -20,6 +20,8 @@ public class CategoryActiPresenter extends BasePresenter<CategoryActiContract.IV
 
     private CategoryActiContract.IView iView;
 
+    private Disposable disposable;
+
     private String query;
 
     public CategoryActiPresenter(CategoryActiContract.IView iView,String query){
@@ -29,7 +31,7 @@ public class CategoryActiPresenter extends BasePresenter<CategoryActiContract.IV
 
     public void getData(){
 
-        CategoryActiModel.getInstance().search_response(query)
+        disposable = CategoryActiModel.getInstance().search_response(query)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -61,6 +63,10 @@ public class CategoryActiPresenter extends BasePresenter<CategoryActiContract.IV
                     }
                 });
 
+    }
+
+    public void disposeThis(){
+        disposable.dispose();
     }
 
 }

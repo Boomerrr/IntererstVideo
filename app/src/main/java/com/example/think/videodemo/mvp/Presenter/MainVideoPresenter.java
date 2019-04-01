@@ -13,6 +13,7 @@ import com.example.think.videodemo.mvp.Model.MainVideoModel;
 import java.util.List;
 import java.util.Observable;
 
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -23,7 +24,7 @@ public class MainVideoPresenter extends BasePresenter<MainVideoContract.IView> {
 
     private MainVideoContract.IView iView;
 
-    private ApiService apiService = MainVideoModel.getInstance();
+    private Disposable disposable;
 
     public MainVideoPresenter(MainVideoContract.IView iView){
         this.iView = iView;
@@ -31,7 +32,8 @@ public class MainVideoPresenter extends BasePresenter<MainVideoContract.IView> {
 
     public void getMainData(){
 
-        apiService.main_response()
+
+        disposable = MainVideoModel.getInstance().main_response().subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -63,10 +65,10 @@ public class MainVideoPresenter extends BasePresenter<MainVideoContract.IView> {
                     }
                 });
 
+
     }
 
-    public void destroy(){
-        apiService = null;
+    public void disposeThis(){
+        disposable.dispose();
     }
-
 }

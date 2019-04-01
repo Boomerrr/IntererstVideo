@@ -22,13 +22,15 @@ public class MainVideoAdversePresenter extends BasePresenter<MainVideoContract.A
 
     private MainVideoContract.AdvView iView;
 
+    private Disposable disposable;
+
     public MainVideoAdversePresenter(MainVideoContract.AdvView iView){
         this.iView = iView;
     }
 
     public void getData(){
 
-                MainVideoAdverseModel.getInstance().hot_response()
+                disposable = MainVideoAdverseModel.getInstance().hot_response()
                         .subscribeOn(Schedulers.io())
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
@@ -58,8 +60,10 @@ public class MainVideoAdversePresenter extends BasePresenter<MainVideoContract.A
                                 iView.dismissLoad();
                             }
                         });
+    }
 
-
+    public void disposeThis(){
+        disposable.dispose();
     }
 
 

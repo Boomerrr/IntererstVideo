@@ -19,13 +19,15 @@ public class HistoricalRankPresenter extends BasePresenter<RankContract.HistIVie
 
     private RankContract.HistIView iView;
 
+    private Disposable disposable;
+
     public HistoricalRankPresenter(RankContract.HistIView iView){
         this.iView = iView;
     }
 
     public void getData(){
 
-        HistorcialRankVideoModel.getInstance().rank_historical_response()
+        disposable = HistorcialRankVideoModel.getInstance().rank_historical_response()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
@@ -56,8 +58,10 @@ public class HistoricalRankPresenter extends BasePresenter<RankContract.HistIVie
                         iView.dismissLoad();
                     }
                 });
+    }
 
-
+    public void disposeThis(){
+        disposable.dispose();
     }
 
 }

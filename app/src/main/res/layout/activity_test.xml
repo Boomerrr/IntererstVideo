@@ -6,11 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.TestActivity">
-
-    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
-        android:id="@+id/videoplayer"
+   <Button
+       android:id="@+id/button1"
+       android:text="button1"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button2"
+        android:text="button2"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
-    </fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
-
+        android:layout_height="wrap_content" />
 </LinearLayout>

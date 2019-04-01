@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.SignInActivity">
+    <TextView
+        android:textColor="@android:color/white"
+        android:background="#1296db"
+        android:id="@+id/login_text"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="注册"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <EditText
+        android:hint="请输入账号名"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/user_name"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/login_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <EditText
+        android:hint="请输入密码"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/user_password_1"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <EditText
+        android:hint="请输入密码"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/user_password_2"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/user_password_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <EditText
+        android:hint="请输入邮箱"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/user_email"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/user_password_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <Button
+        android:textColor="@android:color/white"
+        android:background="@drawable/buttonstyle"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@id/user_password_2"
+        android:layout_marginTop="10dp"
+        android:id="@+id/enter"
+        android:text="注册"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <TextView
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"
+        android:text="version 1.1.0"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

@@ -22,13 +22,15 @@ public class DetailVideoPresenter extends BasePresenter<DetailVideoContract.IVie
 
     private DetailVideoContract.IView iView;
 
+    private Disposable disposable;
+
     public DetailVideoPresenter(DetailVideoContract.IView iView){
         this.iView = iView;
     }
 
     public void getData(){
 
-        DetailVideoModel.getInstance().test()
+        disposable = DetailVideoModel.getInstance().test()
                         .subscribeOn(Schedulers.io())
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
@@ -60,4 +62,8 @@ public class DetailVideoPresenter extends BasePresenter<DetailVideoContract.IVie
                             }
                         });
             }
+
+    public void disposeThis(){
+        disposable.dispose();
+    }
 }

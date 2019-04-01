@@ -19,13 +19,15 @@ public class JokePresenter extends BasePresenter<JokeContract.IView> {
 
     private JokeContract.IView iView;
 
+    private Disposable disposable;
+
     public JokePresenter(JokeContract.IView iView){
         this.iView = iView;
     }
 
     public void getData(){
 
-        JokeModel.getInstance().interest_store_response()
+        disposable = JokeModel.getInstance().interest_store_response()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
