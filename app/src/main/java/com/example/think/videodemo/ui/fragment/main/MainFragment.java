@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.provider.CalendarContract;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import com.example.think.videodemo.Bean.HotVideoBean;
 import com.example.think.videodemo.Bean.MainVideoBean;
+import com.example.think.videodemo.MainActivity;
 import com.example.think.videodemo.R;
 import com.example.think.videodemo.base.BaseFragment;
 import com.example.think.videodemo.mvp.Contract.MainVideoContract;
@@ -48,6 +50,8 @@ public class MainFragment extends BaseFragment implements MainVideoContract.IVie
     @BindView(R.id.search)
     ImageView search;
 
+    @BindView(R.id.history)
+    ImageView history;
 
     @BindView(R.id.mainVideo_recycelerview)
     RecyclerView mainVideo_recyclerview;
@@ -80,6 +84,15 @@ public class MainFragment extends BaseFragment implements MainVideoContract.IVie
             @Override
             public void onClick(View v) {
                 searchPopupWindow();
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity workActivity = (MainActivity) getActivity();
+                DrawerLayout drawerLayout = workActivity.findViewById(R.id.main_drawerlayout);
+                drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();

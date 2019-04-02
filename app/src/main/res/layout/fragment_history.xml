@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@android:color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/text"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="#1296db"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="历史记录"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/text"
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+    <Button
+        android:layout_margin="3dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/buttonstyle"
+        android:gravity="center"
+        android:id="@+id/clear"
+        android:text="清除历史记录"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+</RelativeLayout>
