@@ -3,6 +3,7 @@ package com.example.think.videodemo.mvp.Presenter;
 import android.util.Log;
 
 import com.example.think.videodemo.Bean.JokeBean;
+import com.example.think.videodemo.Util.LogUtil;
 import com.example.think.videodemo.base.BasePresenter;
 import com.example.think.videodemo.mvp.Contract.JokeContract;
 import com.example.think.videodemo.mvp.Model.JokeModel;
@@ -16,6 +17,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class JokePresenter extends BasePresenter<JokeContract.IView> {
+
+    public static final String packageName = JokePresenter.class.getName();
 
     private JokeContract.IView iView;
 
@@ -33,13 +36,12 @@ public class JokePresenter extends BasePresenter<JokeContract.IView> {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         iView.showLoad();
-                        Log.d("Boomerr---test","+1");
+                        LogUtil.loging(packageName,1,packageName + "  开始访问数据");
                     }
                 })
                 .map(new Function<JokeBean, List<JokeBean.Result.JokeItem>>() {
                     @Override
                     public List<JokeBean.Result.JokeItem> apply(JokeBean jokeBean) throws Exception {
-                        Log.d("Boomerr---test","+2");
                         return jokeBean.getResult().getData();
                     }
                 })
@@ -47,15 +49,14 @@ public class JokePresenter extends BasePresenter<JokeContract.IView> {
                 .subscribe(new Consumer<List<JokeBean.Result.JokeItem>>() {
                     @Override
                     public void accept(List<JokeBean.Result.JokeItem> jokeItems) throws Exception {
-                        Log.d("Boomerr---test","+3   " + jokeItems.size() );
-                        Log.d("Boomerr---test",jokeItems.get(1).getContent());
+                        LogUtil.loging(packageName,1,packageName + "  获取数据成功");
                         iView.dismissLoad();
                         iView.showData(jokeItems);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.d("Boomerr---test","+4");
+                        LogUtil.loging(packageName,1,packageName + "  获取数据失败");
                         iView.dismissLoad();
                     }
                 });

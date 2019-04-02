@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.think.videodemo.Api.ApiService;
 import com.example.think.videodemo.Bean.HotVideoBean;
 import com.example.think.videodemo.Bean.TestBean;
+import com.example.think.videodemo.Util.LogUtil;
 import com.example.think.videodemo.mvp.Model.DetailVideoModel;
 import com.example.think.videodemo.base.BasePresenter;
 import com.example.think.videodemo.mvp.Contract.DetailVideoContract;
@@ -19,6 +20,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class DetailVideoPresenter extends BasePresenter<DetailVideoContract.IView> {
+
+    public static final String packageName = DetailVideoPresenter.class.getName();
 
     private DetailVideoContract.IView iView;
 
@@ -36,13 +39,12 @@ public class DetailVideoPresenter extends BasePresenter<DetailVideoContract.IVie
                             @Override
                             public void accept(Disposable disposable) throws Exception {
                                 iView.showLoad();
-                                Log.d("Boomerr---test","1");
+                                LogUtil.loging(packageName,1,packageName + "  开始访问数据");
                             }
                         })
                         .map(new Function<TestBean, List<TestBean.StoriesBean>>() {
                             @Override
                             public List<TestBean.StoriesBean> apply(TestBean hotBean) throws Exception {
-                                Log.d("Boomerr---test","2");
                                 return hotBean.getStories();
                             }
                         })
@@ -50,14 +52,14 @@ public class DetailVideoPresenter extends BasePresenter<DetailVideoContract.IVie
                         .subscribe(new Consumer<List<TestBean.StoriesBean>>() {
                             @Override
                             public void accept(List<TestBean.StoriesBean> storiesBeans) throws Exception {
-                                Log.d("Boomerr---test","3 " + storiesBeans.size());
+                                LogUtil.loging(packageName,1,packageName + "  获取数据成功");
                                 iView.dismissLoad();
                                 iView.showData(storiesBeans);
                             }
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                Log.d("Boomerr---test","4");
+                                LogUtil.loging(packageName,1,packageName + "  获取数据失败");
                                 iView.dismissLoad();
                             }
                         });

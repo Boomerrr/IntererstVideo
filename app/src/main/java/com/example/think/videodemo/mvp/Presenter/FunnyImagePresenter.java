@@ -3,6 +3,7 @@ package com.example.think.videodemo.mvp.Presenter;
 import android.util.Log;
 
 import com.example.think.videodemo.Bean.FunnyImageBean;
+import com.example.think.videodemo.Util.LogUtil;
 import com.example.think.videodemo.base.BasePresenter;
 import com.example.think.videodemo.mvp.Contract.FunnyImageContract;
 import com.example.think.videodemo.mvp.Model.FunnyImageModel;
@@ -18,6 +19,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class FunnyImagePresenter extends BasePresenter<FunnyImageContract.IView> {
+
+    public static final String packageName = FunnyImagePresenter.class.getName();
 
     private FunnyImageContract.IView iView;
 
@@ -35,13 +38,12 @@ public class FunnyImagePresenter extends BasePresenter<FunnyImageContract.IView>
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         iView.showLoad();
-                        Log.d("Boomerr---test", "+1");
+                        LogUtil.loging(packageName,1,packageName + "  开始访问数据");
                     }
                 })
                 .map(new Function<FunnyImageBean, List<FunnyImageBean.Result.FunnyImageItem>>() {
                     @Override
                     public List<FunnyImageBean.Result.FunnyImageItem> apply(FunnyImageBean funnyImageBean) throws Exception {
-                        Log.d("Boomerr---test", "+2");
                         return funnyImageBean.getResult().getData();
                     }
                 })
@@ -49,15 +51,14 @@ public class FunnyImagePresenter extends BasePresenter<FunnyImageContract.IView>
                 .subscribe(new Consumer<List<FunnyImageBean.Result.FunnyImageItem>>() {
                     @Override
                     public void accept(List<FunnyImageBean.Result.FunnyImageItem> funnyImageItemList) throws Exception {
-                        Log.d("Boomerr---test", "+3   " + funnyImageItemList.size());
-                        Log.d("Boomerr---test", funnyImageItemList.get(1).getContent());
+                        LogUtil.loging(packageName,1,packageName + "  获取数据成功");
                         iView.dismissLoad();
                         iView.showData(funnyImageItemList);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.d("Boomerr---test", "+4");
+                        LogUtil.loging(packageName,1,packageName + "  获取数据失败");
                         iView.dismissLoad();
                     }
                 });

@@ -90,6 +90,7 @@ public class VideoInfoActivity extends AppCompatActivity implements AppBarLayout
     }
 
     private void init() {
+
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         String description = intent.getStringExtra("description");
@@ -106,9 +107,6 @@ public class VideoInfoActivity extends AppCompatActivity implements AppBarLayout
 
         Glide.with(this).load(author)
                 .into(user_head);
-
-        //author_avatar.setImageURI(Uri.parse(author));
-        //feed_image.setImageURI(Uri.parse(feed));
         Glide.with(this).load(author)
                 .into(author_avatar);
         Glide.with(this).load(feed)
