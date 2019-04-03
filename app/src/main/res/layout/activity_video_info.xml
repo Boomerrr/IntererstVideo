@@ -148,6 +148,7 @@
                    </LinearLayout>
                </LinearLayout>
                <LinearLayout
+                   android:id="@+id/more"
                    android:clickable="true"
                    android:layout_marginBottom="10dp"
                    android:background="@drawable/more_draw"

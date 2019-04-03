@@ -1,17 +1,18 @@
 package com.example.think.videodemo.ui.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.think.videodemo.R;
@@ -66,6 +67,9 @@ public class VideoInfoActivity extends AppCompatActivity implements AppBarLayout
     @BindView(R.id.user_description)
     TextView user_description;
 
+    @BindView(R.id.more)
+    LinearLayout more;
+
     private boolean mIsTheTitleVisible = false;
 
     private boolean mIsTheTitleContainerVisible = true;
@@ -118,6 +122,27 @@ public class VideoInfoActivity extends AppCompatActivity implements AppBarLayout
         video_player.setUp(playUrl, video_player.SCREEN_LAYOUT_NORMAL,"");
         Glide.with(this).load(blurred)
                 .into(video_player.thumbImageView);
+
+        author_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPic(author);
+            }
+        });
+
+        feed_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPic(feed);
+            }
+        });
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(VideoInfoActivity.this,"敬请期待",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -174,5 +199,26 @@ public class VideoInfoActivity extends AppCompatActivity implements AppBarLayout
     protected void onPause() {
         super.onPause();
         video_player.release();
+    }
+
+    public void showPic(String imageUrl){
+
+        Dialog dialog = new Dialog(this,R.style.AppTheme_NoActionBar);
+        dialog.setContentView(R.layout.dialog_pic_show);
+        ImageView image = dialog.findViewById(R.id.image);
+        Glide.with(dialog.getContext())
+                .load(imageUrl)
+                .into(image);
+        dialog.show();
+        dialog.setCancelable(true);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+
     }
 }
