@@ -1,5 +1,6 @@
 package com.example.think.videodemo.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.bumptech.glide.Glide;
 import com.example.think.videodemo.Bean.HotVideoBean;
 import com.example.think.videodemo.Bean.MainVideoBean;
 import com.example.think.videodemo.R;
+import com.example.think.videodemo.Util.net.NetMonitService;
+import com.example.think.videodemo.Util.net.NetMonitor;
 import com.example.think.videodemo.mvp.Contract.MainVideoContract;
 import com.example.think.videodemo.mvp.Presenter.MainVideoAdversePresenter;
 import com.example.think.videodemo.mvp.Presenter.TestPresenter;
@@ -30,8 +33,8 @@ public class TestActivity extends AppCompatActivity implements MainVideoContract
     @BindView(R.id.button2)
     Button button2;
 
-    TestPresenter testPresenter = new TestPresenter(this);
-    MainVideoAdversePresenter mainVideoAdversePresenter = new MainVideoAdversePresenter(this);
+    //TestPresenter testPresenter = new TestPresenter(this);
+    //MainVideoAdversePresenter mainVideoAdversePresenter = new MainVideoAdversePresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,8 @@ public class TestActivity extends AppCompatActivity implements MainVideoContract
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testPresenter.getMainData();
+                Intent intent = new Intent(TestActivity.this, NetMonitService.class);
+                startService(intent);
             }
         });
 
@@ -49,7 +53,8 @@ public class TestActivity extends AppCompatActivity implements MainVideoContract
             @Override
             public void onClick(View v) {
                 //testPresenter.dispose();
-                mainVideoAdversePresenter.getData();
+                Intent intent = new Intent(TestActivity.this, NetMonitService.class);
+                stopService(intent);
             }
         });
 
@@ -84,4 +89,6 @@ public class TestActivity extends AppCompatActivity implements MainVideoContract
     public void showData(List<HotVideoBean.HotABean.itemBean> hotABeanList) {
         Toast.makeText(this,hotABeanList.get(2).getData().getTitle(),Toast.LENGTH_SHORT).show();
     }
+
+
 }

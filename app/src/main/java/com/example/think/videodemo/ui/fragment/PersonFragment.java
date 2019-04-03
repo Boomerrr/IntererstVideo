@@ -162,7 +162,6 @@ public class PersonFragment extends BaseFragment {
     //默认选项卡有9项   没有内容的以空白存在  每个对应点击方法
     private void clickAction() {
 
-
         //五个选项卡的点击事件
         tab_item_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,9 +197,6 @@ public class PersonFragment extends BaseFragment {
                 item_5_Function();
             }
         });
-
-
-
 
         //头像的点击事件   可以更换本地图片更换头像
         user_head.setOnClickListener(new View.OnClickListener() {

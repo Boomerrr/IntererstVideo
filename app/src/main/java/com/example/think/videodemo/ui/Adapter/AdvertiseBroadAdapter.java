@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ import com.example.think.videodemo.Bean.MainVideoBean;
 import com.example.think.videodemo.R;
 
 import java.util.List;
+
+//广告牌Adapter
 
 public class AdvertiseBroadAdapter extends RecyclerView.Adapter<AdvertiseBroadAdapter.ViewHolder> implements View.OnClickListener{
 
@@ -42,7 +45,6 @@ public class AdvertiseBroadAdapter extends RecyclerView.Adapter<AdvertiseBroadAd
     public AdvertiseBroadAdapter(Context mContext, List<HotVideoBean.HotABean.itemBean> hotABeanList){
         this.hotVideoBeanList = hotABeanList;
         hotVideoBeanList.remove(0);
-        Log.d("Boomerr----test", "advertiseAdapter" + String.valueOf(hotVideoBeanList.size()));
     }
 
     @NonNull
@@ -56,9 +58,10 @@ public class AdvertiseBroadAdapter extends RecyclerView.Adapter<AdvertiseBroadAd
 
     @Override
     public void onBindViewHolder(@NonNull AdvertiseBroadAdapter.ViewHolder viewHolder, int i) {
+
             Glide.with(viewHolder.image_advertisse.getContext())
-                    .load(hotVideoBeanList.get(i).getData().getCover().getFeed())
-                    .into(viewHolder.image_advertisse);
+                .load(hotVideoBeanList.get(i).getData().getCover().getFeed())
+                .into(viewHolder.image_advertisse);
             viewHolder.text_advertise.setText(hotVideoBeanList.get(i).getData().getTitle());
             viewHolder.itemView.setTag(i);
 

@@ -16,24 +16,30 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <!-- 程序的种子入口 -->
-        <activity android:name=".ui.activity.WelcomeActivity">
+        <activity android:name=".ui.activity.WelcomeActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.activity.DetailVideoActivity" />
+        <activity android:name=".ui.activity.MoreActivity" />
+        <activity android:name=".ui.activity.HistoryActivity" />
+        <activity android:name=".ui.activity.VideoInfoActivity" />
+        <activity android:name=".ui.activity.CategoryActivity" />
+        <activity android:name=".ui.activity.SplashActivity" />
+        <activity android:name=".ui.activity.LogInActivity" />
+        <activity android:name=".ui.activity.SignInActivity" />
+        <activity android:name=".ui.activity.PicShowActivity" />
+
+        <service android:name=".Util.net.NetMonitService"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <activity android:name=".ui.activity.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ui.activity.DetailVideoActivity" />
-        <activity android:name=".ui.activity.MoreActivity" />
-        <activity android:name=".ui.activity.HistoryActivity" />
-        <activity android:name=".ui.activity.TestActivity"></activity>
-        <activity android:name=".ui.activity.VideoInfoActivity" />
-        <activity android:name=".ui.activity.CategoryActivity" />
-        <activity android:name=".ui.activity.SplashActivity" />
-        <activity android:name=".ui.activity.LogInActivity" />
-        <activity android:name=".ui.activity.SignInActivity" />
-        <activity android:name=".ui.activity.PicShowActivity"></activity>
+
     </application>
 
 </manifest>

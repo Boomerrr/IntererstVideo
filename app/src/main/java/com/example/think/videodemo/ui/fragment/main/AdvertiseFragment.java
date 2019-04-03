@@ -7,7 +7,10 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.think.videodemo.Bean.HotVideoBean;
 import com.example.think.videodemo.R;
 import com.example.think.videodemo.base.BaseFragment;
@@ -28,6 +31,9 @@ public class AdvertiseFragment extends BaseFragment implements MainVideoContract
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
+
+    @BindView(R.id.linearlayout)
+    LinearLayout layoutPGroup;
 
     private MainVideoAdversePresenter mainVideoAdversePresenter;
 
@@ -56,6 +62,7 @@ public class AdvertiseFragment extends BaseFragment implements MainVideoContract
     public void showData(List<HotVideoBean.HotABean.itemBean> hotABeanList) {
         this.hotABeanList = hotABeanList;
         advertiseBroadAdapter = new AdvertiseBroadAdapter(mContext,hotABeanList);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);

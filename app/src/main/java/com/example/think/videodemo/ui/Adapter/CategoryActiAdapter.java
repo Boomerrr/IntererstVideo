@@ -61,11 +61,8 @@ public class CategoryActiAdapter extends RecyclerView.Adapter<CategoryActiAdapte
         Glide.with(viewHolder.image_rank_video.getContext())
                 .load(detailVideos.get(i).getDate().getCover().getFeed())
                 .into(viewHolder.image_rank_video);
-
         viewHolder.title_rank_video.setText(detailVideos.get(i).getDate().getTitle());
-
         viewHolder.category_rank_video.setText("#" + detailVideos.get(i).getDate().getCategory());
-
         viewHolder.itemView.setTag(i);
 
     }
