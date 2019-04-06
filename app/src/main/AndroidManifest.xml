@@ -16,7 +16,13 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <!-- 程序的种子入口 -->
-        <activity android:name=".ui.activity.WelcomeActivity"></activity>
+        <activity android:name=".ui.activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.activity.DetailVideoActivity" />
         <activity android:name=".ui.activity.MoreActivity" />
@@ -33,11 +39,7 @@
             android:exported="true"/>
 
         <activity android:name=".ui.activity.TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>

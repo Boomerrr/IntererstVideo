@@ -1,13 +1,25 @@
 package com.example.think.videodemo;
 
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 
+import com.example.think.videodemo.Util.LogUtil;
+import com.example.think.videodemo.Util.net.NetMonitService;
 import com.example.think.videodemo.base.BaseFragment;
 import com.example.think.videodemo.ui.fragment.discovery.DiscoveryFragment;
 import com.example.think.videodemo.ui.fragment.main.MainFragment;
@@ -32,6 +44,10 @@ public class MainActivity extends FragmentActivity {
     @BindView(R.id.main_rd)
     RadioGroup radioGroup;
 
+    private NetMonitService iService;
+
+    private NetMonitService.MyBinder iBinder;
+
     private List<BaseFragment> fragmentList;
 
     private int position;
@@ -43,8 +59,20 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Intent bindIntent = new Intent(MainActivity.this, NetMonitService.class);
+        bindService(bindIntent, connection, Context.BIND_AUTO_CREATE);
+        initBroadCast();
         initFragment();
         setListener();
+    }
+
+    private void initBroadCast() {
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("net.is.ok");
+        intentFilter.addAction("net.isnot.ok");
+        registerReceiver(mReceiver,intentFilter);
+
     }
 
     private void setListener() {
@@ -112,4 +140,37 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            iService = ((NetMonitService.MyBinder)service).getService();
+            iBinder = (NetMonitService.MyBinder)service;
+            iBinder.getState();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            iService = null;
+        }
+    };
+
+
+    protected final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if("net.isnot.ok".equals(action)){
+                Toast.makeText(MainActivity.this,"无网络",Toast.LENGTH_SHORT).show();
+            }else if("net.is.ok".equals(action)){
+                //Toast.makeText(MainActivity.this,"网络连接",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
+        unregisterReceiver(mReceiver);
+    }
 }

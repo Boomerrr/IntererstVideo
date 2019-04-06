@@ -1,39 +1,50 @@
 package com.example.think.videodemo.Util.net;
 
-import android.app.AlertDialog;
 import android.app.Service;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
+import android.content.ServiceConnection;
 import android.os.Binder;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.SystemClock;
+import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.constraint.solver.widgets.ConstraintAnchor;
+import android.telephony.NetworkScan;
 
 import com.example.think.videodemo.Util.LogUtil;
-
-import java.util.Observable;
-import java.util.Observer;
-
 
 // 后台网络监测服务
 
 public class NetMonitService extends Service {
 
+    private boolean isConnected;
+
     public static final String packageName = NetMonitService.class.getName();
 
-    private Handler hander = new Handler();
+    private Handler hander = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    hander.post(runnable);
+                    Message message = new Message();
+                    message.what = 1;
+                    hander.sendMessageDelayed(message,5000);
+            }
+        }
+    };
 
     private IBinder iBinder = new MyBinder();
 
     public class MyBinder extends Binder{
+
         public NetMonitService getService() {
             return NetMonitService.this;    //返回本服务
+        }
+
+        public boolean getState(){
+            return isConnected ;
         }
     }
 
@@ -46,8 +57,9 @@ public class NetMonitService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtil.loging(packageName,1,"网络监测服务建立");
-        hander.post(runnable);
+        Message msg = new Message();
+        msg.what = 1;
+        hander.sendMessage(msg);
     }
 
     @Override
@@ -60,22 +72,32 @@ public class NetMonitService extends Service {
     public void onDestroy() {
         super.onDestroy();
         runnable = null;
+        hander = null;
         LogUtil.loging(packageName,1,"网络监测服务销毁");
     }
 
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            while(true){
-                boolean isConnected = NetMonitor.checkNet(NetMonitService.this);
+                isConnected = NetMonitor.checkNet(NetMonitService.this);
                 LogUtil.loging(packageName,1,"当前网络状态  = " +  isConnected);
-                SystemClock.sleep(5000);
-            }
+                if(isConnected){
+                    Intent intent = new Intent();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setAction("net.is.ok");
+                    NetMonitService.this.sendBroadcast(intent);
+                }else{
+                    Intent intent = new Intent();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setAction("net.isnot.ok");
+                    NetMonitService.this.sendBroadcast(intent);
+                }
         }
     };
 
     public boolean onUnbind(Intent intent){
         return super.onUnbind(intent);
     }
+
 
 }

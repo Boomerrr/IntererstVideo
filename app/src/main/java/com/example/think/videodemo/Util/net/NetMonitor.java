@@ -14,8 +14,6 @@ public class NetMonitor {
 
     public static boolean checkNet(Context context){
 
-        boolean isConnected = false;
-
         if (Build.VERSION.SDK_INT >= 23){
             ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(CONNECTIVITY_SERVICE);
             Network[] networks = connectivityManager.getAllNetworks();
