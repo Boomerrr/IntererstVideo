@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import com.example.think.videodemo.Util.Database.MyDatabaseHelper;
 import com.example.think.videodemo.Util.LogUtil;
 import com.example.think.videodemo.Util.net.NetMonitService;
 import com.example.think.videodemo.base.BaseFragment;
@@ -53,6 +55,8 @@ public class MainActivity extends FragmentActivity {
     private int position;
 
     private Fragment mContext;
+
+    private MyDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,12 +15,17 @@
         android:text="历史记录"
         android:layout_width="match_parent"
         android:layout_height="30dp" />
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/text"
-        android:id="@+id/recyclerview"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/text"
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <Button
         android:layout_margin="3dp"
         android:layout_alignParentBottom="true"

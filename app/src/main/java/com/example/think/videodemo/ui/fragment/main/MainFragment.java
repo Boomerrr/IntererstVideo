@@ -1,8 +1,10 @@
 package com.example.think.videodemo.ui.fragment.main;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.provider.CalendarContract;
@@ -26,6 +28,7 @@ import com.example.think.videodemo.Bean.HotVideoBean;
 import com.example.think.videodemo.Bean.MainVideoBean;
 import com.example.think.videodemo.MainActivity;
 import com.example.think.videodemo.R;
+import com.example.think.videodemo.Util.Database.MyDatabaseHelper;
 import com.example.think.videodemo.base.BaseFragment;
 import com.example.think.videodemo.mvp.Contract.MainVideoContract;
 import com.example.think.videodemo.mvp.Presenter.MainVideoPresenter;
@@ -67,6 +70,10 @@ public class MainFragment extends BaseFragment implements MainVideoContract.IVie
     private MainVideoPresenter mainVideoPresenter;
 
     private List<MainVideoBean.DetailVideo> dataList;
+
+    private MyDatabaseHelper dbHelper;
+
+    private SQLiteDatabase sqLiteDatabase;
 
     @Override
     protected View initView() {
@@ -111,6 +118,8 @@ public class MainFragment extends BaseFragment implements MainVideoContract.IVie
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        dbHelper = new MyDatabaseHelper(getActivity(),"history.db",null,1);
+        sqLiteDatabase = dbHelper.getWritableDatabase();
     }
 
     private void searchPopupWindow() {
@@ -213,6 +222,19 @@ public class MainFragment extends BaseFragment implements MainVideoContract.IVie
 
     @Override
     public void onItemClick(int position) {
+
+        ContentValues values = new ContentValues();
+        values.put("title",dataList.get(position).getData().getTitle());
+        values.put("description",dataList.get(position).getData().getDescription());
+        values.put("playUrl",dataList.get(position).getData().getPlayUrl());
+        values.put("category",dataList.get(position).getData().getCategory());
+        values.put("author",dataList.get(position).getData().getAuthor().getIcon());
+        values.put("feed",dataList.get(position).getData().getCover().getFeed());
+        values.put("userName",dataList.get(position).getData().getAuthor().getName());
+        values.put("userDescription",dataList.get(position).getData().getAuthor().getDescription());
+        values.put("blurred",dataList.get(position).getData().getCover().getBlurred());
+        sqLiteDatabase.insert("VIDEO_HISTORY",null,values);
+
         Intent intent = new Intent(getActivity(), VideoInfoActivity.class);
         intent.putExtra("title",dataList.get(position).getData().getTitle());
         intent.putExtra("description",dataList.get(position).getData().getDescription());
