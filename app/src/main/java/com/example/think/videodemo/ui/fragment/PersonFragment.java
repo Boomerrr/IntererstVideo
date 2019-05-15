@@ -37,6 +37,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
 
+/**
+ *  Boomerr 2019/3/20
+ *  email yi.bochen@foxmail.com
+ *  个人内容
+ * */
+
 public class PersonFragment extends BaseFragment {
 
     private Unbinder unbinder;
@@ -58,10 +64,6 @@ public class PersonFragment extends BaseFragment {
 
     @BindView(R.id.item_5)
     LinearLayout tab_item_5;
-
-
-
-
 
     @BindView(R.id.item_text_1)
     TextView item_text_1;
@@ -107,8 +109,6 @@ public class PersonFragment extends BaseFragment {
     @BindView(R.id.more)
     TextView more;
 
-
-    //
 
 
 
@@ -310,6 +310,7 @@ public class PersonFragment extends BaseFragment {
         String imagePath = getImagePath(uri, null);
         displayImage(imagePath);
     }
+
 
     private String getImagePath(Uri uri, String selection) {
         String path = null;

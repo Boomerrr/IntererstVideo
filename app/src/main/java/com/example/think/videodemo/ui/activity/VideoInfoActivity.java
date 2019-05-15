@@ -198,7 +198,17 @@ public class VideoInfoActivity extends AppCompatActivity implements AppBarLayout
     @Override
     protected void onPause() {
         super.onPause();
-        video_player.release();
+        if(video_player!= null){
+            video_player.release();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(video_player!= null){
+            video_player.release();
+        }
     }
 
     public void showPic(String imageUrl){

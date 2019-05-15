@@ -41,10 +41,38 @@
                   android:layout_height="25dp" />
           </RelativeLayout>
       </android.support.v7.widget.Toolbar>
-      <FrameLayout
+      <RelativeLayout
           android:id="@+id/adv_container"
           android:layout_width="match_parent"
-          android:layout_height="200dp"/>
+          android:layout_height="200dp">
+          <android.support.v4.view.ViewPager
+              android:id="@+id/viewpager"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+          </android.support.v4.view.ViewPager>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignBottom="@id/viewpager"
+              android:background="#33000000"
+              android:orientation="vertical"
+              android:padding="5dp" >
+              <TextView
+                  android:id="@+id/image_description"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:text="淮左名都，竹西佳处，解鞍少驻初程。"
+                  android:textColor="@android:color/white" />
+              <LinearLayout
+                  android:id="@+id/mShowPointer"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_gravity="center_horizontal"/>
+          </LinearLayout>
+      </RelativeLayout>
       <View
           android:layout_width="match_parent"
           android:layout_height="5dp"/>

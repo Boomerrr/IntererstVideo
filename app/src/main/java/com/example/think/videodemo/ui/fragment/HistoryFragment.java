@@ -53,6 +53,7 @@ public class HistoryFragment extends BaseFragment {
     @Override
     protected View initView() {
         View view = View.inflate(mContext, R.layout.fragment_history,null);
+        unbinder = ButterKnife.bind(this,view);
         initRecyclerview(view);
         return view;
     }

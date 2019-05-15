@@ -19,17 +19,24 @@ import com.example.think.videodemo.R;
 
 import java.util.List;
 
-//广告牌Adapter
+/**
+ *
+ *  广告牌Adapter
+ * 已弃用
+ *
+ */
+
+
 
 public class AdvertiseBroadAdapter extends RecyclerView.Adapter<AdvertiseBroadAdapter.ViewHolder> implements View.OnClickListener{
 
     private Context mContext;
     private List<HotVideoBean.HotABean.itemBean> hotVideoBeanList;
-    private OnItemClickListener mItemClickListener;
+    private OnItemClickListener1 mItemClickListener;
     @Override
     public void onClick(View v) {
-        if (mItemClickListener!=null){
-            mItemClickListener.onItemClick((Integer) v.getTag());
+        if (mItemClickListener != null){
+            mItemClickListener.onItemClick1((Integer) v.getTag());
         }
     }
 
@@ -66,15 +73,15 @@ public class AdvertiseBroadAdapter extends RecyclerView.Adapter<AdvertiseBroadAd
             viewHolder.itemView.setTag(i);
 
     }
-    public interface OnItemClickListener{
-        void onItemClick(int position);
+    public interface OnItemClickListener1{
+        void onItemClick1(int position);
     }
     @Override
     public int getItemCount() {
         return hotVideoBeanList.size();
     }
 
-    public void setItemClickListener(OnItemClickListener itemClickListener) {
+    public void setItemClickListener(OnItemClickListener1 itemClickListener) {
         mItemClickListener = itemClickListener;
     }
 }

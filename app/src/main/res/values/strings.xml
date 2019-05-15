@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VideoDemo</string>
+    <string name="app_name">趣视频</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 
     <string name="avatar_behavior" translatable="false">

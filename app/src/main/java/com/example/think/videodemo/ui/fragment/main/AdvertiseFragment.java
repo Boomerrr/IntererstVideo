@@ -25,15 +25,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class AdvertiseFragment extends BaseFragment implements MainVideoContract.AdvView,AdvertiseBroadAdapter.OnItemClickListener{
+public class AdvertiseFragment extends BaseFragment implements MainVideoContract.AdvView,AdvertiseBroadAdapter.OnItemClickListener1{
 
     private Unbinder unbinder;
 
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerView;
-
-    @BindView(R.id.linearlayout)
-    LinearLayout layoutPGroup;
 
     private MainVideoAdversePresenter mainVideoAdversePresenter;
 
@@ -60,19 +55,7 @@ public class AdvertiseFragment extends BaseFragment implements MainVideoContract
 
     @Override
     public void showData(List<HotVideoBean.HotABean.itemBean> hotABeanList) {
-        this.hotABeanList = hotABeanList;
-        advertiseBroadAdapter = new AdvertiseBroadAdapter(mContext,hotABeanList);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        advertiseBroadAdapter.setItemClickListener(this);
-        recyclerView.setAdapter(advertiseBroadAdapter);
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(recyclerView);
-        Log.d("Boomerr---test","AdvertiseFragment");
-        Log.d("Boomerr---test","Advertise-----------" + hotABeanList.get(1).getData().getPlayUrl());
-        runnable();
 
     }
 
@@ -90,7 +73,7 @@ public class AdvertiseFragment extends BaseFragment implements MainVideoContract
 
                             @Override
                             public void run() {
-                                recyclerView.smoothScrollToPosition(index % advertiseBroadAdapter.getItemCount());
+                                //recyclerView.smoothScrollToPosition(index % advertiseBroadAdapter.getItemCount());
                                 index++;
                             }
                         });
@@ -124,7 +107,7 @@ public class AdvertiseFragment extends BaseFragment implements MainVideoContract
         mainVideoAdversePresenter = null;
     }
 
-    @Override
+    //@Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getActivity(), VideoInfoActivity.class);
         intent.putExtra("title",hotABeanList.get(position).getData().getTitle());
@@ -137,5 +120,10 @@ public class AdvertiseFragment extends BaseFragment implements MainVideoContract
         intent.putExtra("userDescription",hotABeanList.get(position).getData().getAuthor().getDescription());
         intent.putExtra("blurred",hotABeanList.get(position).getData().getCover().getBlurred());
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick1(int position) {
+
     }
 }
