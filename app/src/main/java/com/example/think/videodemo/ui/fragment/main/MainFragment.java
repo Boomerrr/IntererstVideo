@@ -414,7 +414,7 @@ public class MainFragment extends BaseFragment implements
 
     //广告牌点击事件
     public void onItemClick1(int position) {
-        position++;
+        position = position % 6 + 1;
         Intent intent = new Intent(mContext, VideoInfoActivity.class);
         intent.putExtra("title",hotABeanList.get(position).getData().getTitle());
         intent.putExtra("description",hotABeanList.get(position).getData().getDescription());
